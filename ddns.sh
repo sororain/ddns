@@ -11,6 +11,17 @@ info()  { echo -e "${GREEN}[信息]${NC} $1"; }
 warn()  { echo -e "${YELLOW}[警告]${NC} $1"; }
 error() { echo -e "${RED}[错误]${NC} $1"; }
 
+# 信号清理（Ctrl+C 时自动清理临时目录）
+TMP_DIR=""
+cleanup() {
+  cd /
+  if [ -n "$TMP_DIR" ] && [ -d "$TMP_DIR" ]; then
+    rm -rf "$TMP_DIR"
+    info "已清理临时文件"
+  fi
+}
+trap cleanup EXIT INT TERM
+
 # Root 权限检测
 if [ "$(id -u)" -ne 0 ]; then
   error "请以 root 用户或使用 sudo 运行此脚本"
