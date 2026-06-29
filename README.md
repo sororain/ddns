@@ -117,13 +117,5 @@ http://<服务器IP>:9876
 
 </details>
 
----
-
-## 🔗 相关链接
-
-- [ddns-go][ddns-go] — 使用的 DDNS 工具
-- [@DDNSGoBot][DDNSGoBot] — Telegram 通知机器人
-- [ddns-telegram-bot](https://github.com/WingLim/ddns-telegram-bot) — Telegram 机器人源码
-
 [ddns-go]: https://github.com/jeessy2/ddns-go
 [DDNSGoBot]: https://t.me/DDNSGoBot

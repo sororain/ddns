@@ -125,8 +125,17 @@ info "启动服务..."
 systemctl start ddns-go
 systemctl enable ddns-go
 
+# 获取本机 IP
+LOCAL_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
+PUBLIC_IP=$(curl -s --max-time 3 https://api.ipify.org 2>/dev/null || echo "")
+
 echo ""
 info "======================================"
 info "  ddns-go 安装/更新完成！"
-info "  请访问 http://<本机IP>:9876 进行配置"
+if [ -n "$PUBLIC_IP" ]; then
+  info "  公网访问：http://$PUBLIC_IP:9876"
+fi
+if [ -n "$LOCAL_IP" ]; then
+  info "  局域网访问：http://$LOCAL_IP:9876"
+fi
 info "======================================"
