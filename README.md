@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/platform-linux%20%7C%20arm-lightgrey?style=flat-square" alt="Platform">
 </p>
 
-> 🚀 一键部署 [ddns-go][ddns-go] — 自动检测 CPU 架构，下载最新版本并注册为系统服务
+> 🚀 一键部署 [ddns-go][ddns-go] — 自动检测 CPU 架构，下载最新版本并注册为系统服务。安装后可通过 `ddns` 命令随时查看访问地址
 
 ---
 
@@ -44,7 +44,14 @@ wget -qO- https://raw.githubusercontent.com/sororain/ddns/main/ddns.sh | bash
 
 ## 📖 使用说明
 
-安装完成后，脚本会自动获取并显示服务器 IP，通过浏览器访问进行配置。
+安装完成后，脚本会自动安装 `ddns` 命令并显示服务器 IP。
+
+```bash
+# 随时查看访问地址
+ddns
+```
+
+通过浏览器访问进行配置：
 
 > 首次访问会进入初始化配置页面，需填写 DNS 服务商凭证（支持阿里云、腾讯云、Cloudflare、华为云等）和需要解析的域名。
 
