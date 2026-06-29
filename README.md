@@ -17,7 +17,6 @@
 - [Webhook 通知](#-webhook-通知)
   - [企业微信](#企业微信)
   - [Telegram](#telegram)
-- [相关链接](#-相关链接)
 
 ---
 
@@ -45,11 +44,7 @@ wget -qO- https://raw.githubusercontent.com/sororain/ddns/main/ddns.sh | bash
 
 ## 📖 使用说明
 
-安装完成后，通过浏览器访问进行配置：
-
-```
-http://<服务器IP>:9876
-```
+安装完成后，脚本会自动获取并显示服务器 IP，通过浏览器访问进行配置。
 
 > 首次访问会进入初始化配置页面，需填写 DNS 服务商凭证（支持阿里云、腾讯云、Cloudflare、华为云等）和需要解析的域名。
 
