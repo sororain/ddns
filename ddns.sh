@@ -135,7 +135,7 @@ echo "ddns-go 访问地址："
 [ -n "$PUBLIC_IP" ] && echo "  公网：http://$PUBLIC_IP:9876"
 [ -n "$LOCAL_IP" ] && echo "  内网：http://$LOCAL_IP:9876"
 echo ""
-echo "卸载服务：sudo ddns-uninstall"
+echo "卸载服务：ddns-uninstall"
 EOF
 chmod +x /usr/local/bin/ddns
 info "输入 ddns 可查看访问地址"
@@ -186,7 +186,7 @@ fi
 info "ddns-go 已卸载完成！"
 EOF
 chmod +x /usr/local/bin/ddns-uninstall
-info "输入 sudo ddns-uninstall 可卸载 ddns-go"
+info "输入 ddns-uninstall 可卸载 ddns-go"
 
 # 获取本机 IP
 LOCAL_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
@@ -203,5 +203,5 @@ if [ -n "$LOCAL_IP" ]; then
 fi
 info "--------------------------------------"
 info "  查看地址：ddns"
-info "  卸载服务：sudo ddns-uninstall"
+info "  卸载服务：ddns-uninstall"
 info "======================================"
