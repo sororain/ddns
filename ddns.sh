@@ -138,6 +138,54 @@ EOF
 chmod +x /usr/local/bin/ddns
 info "输入 ddns 可查看访问地址"
 
+# 安装 ddns-uninstall 卸载命令
+cat > /usr/local/bin/ddns-uninstall << 'EOF'
+#!/bin/bash
+# ddns-uninstall - 卸载 ddns-go
+set -e
+
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+info()  { echo -e "${GREEN}[信息]${NC} $1"; }
+warn()  { echo -e "${YELLOW}[警告]${NC} $1"; }
+error() { echo -e "${RED}[错误]${NC} $1"; }
+
+# Root 权限检测
+if [ "$(id -u)" -ne 0 ]; then
+  error "请以 root 用户或使用 sudo 运行此脚本"
+  exit 1
+fi
+
+# 停止并禁用服务
+if systemctl list-unit-files 2>/dev/null | grep -q '^ddns-go'; then
+  info "停止并禁用服务..."
+  systemctl stop ddns-go 2>/dev/null || true
+  systemctl disable ddns-go 2>/dev/null || true
+fi
+
+# 卸载系统服务（允许失败）
+if command -v ddns-go &>/dev/null; then
+  info "卸载系统服务..."
+  ddns-go -s uninstall 2>/dev/null || true
+fi
+
+# 删除程序与辅助命令
+rm -f /usr/bin/ddns-go /usr/local/bin/ddns /usr/local/bin/ddns-uninstall
+
+# 删除配置目录
+if [ -d /opt/ddns-go ]; then
+  warn "删除配置目录 /opt/ddns-go"
+  rm -rf /opt/ddns-go
+fi
+
+info "ddns-go 已卸载完成！"
+EOF
+chmod +x /usr/local/bin/ddns-uninstall
+info "输入 sudo ddns-uninstall 可卸载 ddns-go"
+
 # 获取本机 IP
 LOCAL_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
 PUBLIC_IP=$(curl -s --max-time 3 https://api.ipify.org 2>/dev/null || echo "")
@@ -151,4 +199,7 @@ fi
 if [ -n "$LOCAL_IP" ]; then
   info "  局域网访问：http://$LOCAL_IP:9876"
 fi
+info "--------------------------------------"
+info "  查看地址：ddns"
+info "  卸载服务：sudo ddns-uninstall"
 info "======================================"
