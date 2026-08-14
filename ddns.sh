@@ -134,6 +134,8 @@ PUBLIC_IP=$(curl -s --max-time 3 https://api.ipify.org 2>/dev/null || echo "")
 echo "ddns-go 访问地址："
 [ -n "$PUBLIC_IP" ] && echo "  公网：http://$PUBLIC_IP:9876"
 [ -n "$LOCAL_IP" ] && echo "  内网：http://$LOCAL_IP:9876"
+echo ""
+echo "卸载服务：sudo ddns-uninstall"
 EOF
 chmod +x /usr/local/bin/ddns
 info "输入 ddns 可查看访问地址"
