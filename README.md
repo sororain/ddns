@@ -14,9 +14,6 @@
 
 - [快速安装](#-快速安装)
 - [使用说明](#-使用说明)
-- [Webhook 通知](#-webhook-通知)
-  - [企业微信](#企业微信)
-  - [Telegram](#telegram)
 
 ---
 
@@ -65,59 +62,4 @@ ddns
 
 ---
 
-## 🔔 Webhook 通知
-
-### 企业微信
-
-<details>
-<summary>点击展开配置步骤</summary>
-
-1. 下载企业微信 → 左上角 **三横杠** → **全新创建企业** → 选择 **个人组件团队**（创建个人企业群聊）
-2. 进入群聊 → 添加 **群机器人** → 复制机器人 Webhook URL
-3. 粘贴到 ddns-go 后台的 Webhook URL 地址栏
-4. RequestBody 填入以下 JSON：
-
-```json
-{
-  "msgtype": "markdown",
-  "markdown": {
-    "content": "公网IP变更：\n- IPv4地址：#{ipv4Addr}\n- 域名更新结果：#{ipv4Result}\n- IPv6地址：#{ipv6Addr}\n- 域名更新结果：#{ipv6Result}\n"
-  }
-}
-```
-
-</details>
-
-### Telegram
-
-<details>
-<summary>点击展开配置步骤</summary>
-
-使用专用机器人 [@DDNSGoBot][DDNSGoBot] 接收通知。
-
-1. 打开 Telegram，搜索并启用 [@DDNSGoBot][DDNSGoBot]
-2. 发送命令 `/gethook`
-3. 复制返回的 **Webhook URL**，粘贴到 ddns-go 后台
-4. 复制 **RequestBody**，粘贴到 ddns-go 后台
-
-```json
-{
-  "ipv4": {
-    "result": "#{ipv4Result}",
-    "addr": "#{ipv4Addr}",
-    "domains": "#{ipv4Domains}"
-  },
-  "ipv6": {
-    "result": "#{ipv6Result}",
-    "addr": "#{ipv6Addr}",
-    "domains": "#{ipv6Domains}"
-  }
-}
-```
-
-> 注：未启用 IPv4 或 IPv6 可删除对应 Object
-
-</details>
-
 [ddns-go]: https://github.com/jeessy2/ddns-go
-[DDNSGoBot]: https://t.me/DDNSGoBot
